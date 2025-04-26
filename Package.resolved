@@ -1,0 +1,15 @@
+{
+  "originHash" : "7d88cfe749a4b74ce704fba930bd1b495baada0ab5f9142aa66c4f8e568532df",
+  "pins" : [
+    {
+      "identity" : "neo",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/iOSBrett/Neo.git",
+      "state" : {
+        "revision" : "a94ab2478a9309c3694dea653cfcba3d1bf28c9d",
+        "version" : "0.9.5"
+      }
+    }
+  ],
+  "version" : 3
+}
