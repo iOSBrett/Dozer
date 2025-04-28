@@ -11,8 +11,14 @@ import Neo
 
 public typealias Point2 = Vector2
 
-//public extension Point2 {
-//    var asCGPoint: CGPoint {
-//        CGPoint(x: CGFloat(x), y: CGFloat(y))
-//    }
-//}
+public extension Point2 {
+    var asCGPoint: CGPoint {
+        CGPoint(x: CGFloat(x), y: CGFloat(y))
+    }
+}
+
+public extension CGPoint {
+    var asPoint2: Point2 {
+        Point2(x: Float(x), y: Float(y))
+    }
+}

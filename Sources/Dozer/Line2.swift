@@ -7,12 +7,17 @@
 import Foundation
 import Neo
 
-//struct Line2 {
-//    var p1: Point2
-//    var p2: Point2
-//    
-//    var asVector2 : Vector2 {
-//        return p2 - p1
-//    }
-//}
-//
+public struct Line2 {
+    public var p1: Point2
+    public var p2: Point2
+    
+    public init(p1: Point2, p2: Point2) {
+        self.p1 = p1
+        self.p2 = p2
+    }
+
+    public var asVector2 : Vector2 {
+        return p2 - p1
+    }
+}
+

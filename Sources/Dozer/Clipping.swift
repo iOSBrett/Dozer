@@ -21,7 +21,7 @@ private enum Region: Int {
 //   ------+------+------
 //    0101 | 0100 | 0110
 //
-private func calculateRegionCode(point p: CGPoint, window: CGRect) -> Int {
+private func calculateRegionCode(point p: Point2, window: Rect2) -> Int {
     var regionCode = Region.inside.rawValue
     
     if p.x < window.minX {
@@ -43,25 +43,25 @@ private func calculateRegionCode(point p: CGPoint, window: CGRect) -> Int {
 
 // Cohen Sutherland clip algorithm
 //
-public func clipLine(_ point1: CGPoint, _ point2: CGPoint, viewPort: CGRect) -> (CGPoint, CGPoint)? {
-    
-    var p1 = point1
-    var p2 = point2
+public func clip(line: Line2, viewPort: Rect2) -> Line2? {
+
+    var p1 = line.p1
+    var p2 = line.p2
     
     var p1Code = calculateRegionCode(point: p1, window: viewPort)
     var p2Code = calculateRegionCode(point: p2, window: viewPort)
 
     repeat {
         // Both points in thw window
-        if p1Code == 0 && p2Code == 0 { return (p1, p2) }
+        if p1Code == 0 && p2Code == 0 { return line }
         
         // Outside window and in same region
         if p1Code & p2Code != 0 { return nil }
         
         // Pick which endpoint is outside the window (could be both)
         let regionCode = p1Code != 0 ? p1Code : p2Code
-        var x: CGFloat = 0
-        var y: CGFloat = 0
+        var x: Float = 0
+        var y: Float = 0
         
         // Find intersection point:
         //   y = y1 + slope * (x - x1)
@@ -90,14 +90,18 @@ public func clipLine(_ point1: CGPoint, _ point2: CGPoint, viewPort: CGRect) -> 
         
         // Substitute interection for point outside the window
         if regionCode == p1Code {
-            p1 = CGPoint(x: x, y: y)
+            p1 = Point2(x: x, y: y)
             p1Code = calculateRegionCode(point: p1, window: viewPort)
         }
         else {
-            p2 = CGPoint(x: x, y: y)
+            p2 = Point2(x: x, y: y)
             p2Code = calculateRegionCode(point: p2, window: viewPort)
         }
     } while (p1Code != 0 || p2Code != 0)
     
-    return (p1, p2)
+    return Line2(p1: p1, p2: p2)
+}
+
+public func clip(line: Line2, viewPort: CGRect) -> Line2? {
+    clip(line: line, viewPort: viewPort.toRect())
 }
