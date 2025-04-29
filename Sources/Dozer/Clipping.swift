@@ -45,8 +45,8 @@ private func calculateRegionCode(point p: Point2, window: Rect2) -> Int {
 //
 public func clip(line: Line2, viewPort: Rect2) -> Line2? {
 
-    var p1 = line.p1
-    var p2 = line.p2
+    var p1 = line.start
+    var p2 = line.end
     
     var p1Code = calculateRegionCode(point: p1, window: viewPort)
     var p2Code = calculateRegionCode(point: p2, window: viewPort)
@@ -99,7 +99,7 @@ public func clip(line: Line2, viewPort: Rect2) -> Line2? {
         }
     } while (p1Code != 0 || p2Code != 0)
     
-    return Line2(p1: p1, p2: p2)
+    return Line2(start: p1, end: p2)
 }
 
 public func clip(line: Line2, viewPort: CGRect) -> Line2? {

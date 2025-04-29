@@ -8,16 +8,16 @@ import Foundation
 import Neo
 
 public struct Line2 {
-    public var p1: Point2
-    public var p2: Point2
-    
-    public init(p1: Point2, p2: Point2) {
-        self.p1 = p1
-        self.p2 = p2
+    public var start: Point2
+    public var end: Point2
+        
+    public init(start: Point2, end: Point2) {
+        self.start = start
+        self.end = end
     }
 
     public var asVector2 : Vector2 {
-        return p2 - p1
+        return end - start
     }
 }
 
