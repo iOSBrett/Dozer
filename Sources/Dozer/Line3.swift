@@ -6,7 +6,7 @@
 //
 import Neo
 
-public struct Line3 {
+public struct Line3: Hashable {
     public var start: Point3
     public var end: Point3
         
@@ -19,4 +19,3 @@ public struct Line3 {
         return end - start
     }
 }
-
